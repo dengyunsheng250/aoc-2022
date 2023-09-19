@@ -20,7 +20,7 @@ impl Out {
         }
     }
     fn score(&self) -> i32 {
-        match self {
+        match *self {
             Self::Lose => 0,
             Self::Draw => 3,
             Self::Win => 6,
