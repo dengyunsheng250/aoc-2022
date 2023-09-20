@@ -13,7 +13,6 @@ impl Pair {
     }
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let t = (1, 2);
     let v = fs::read_to_string("input.txt")?
         .lines()
         .map(|s| s.split(',').map(|s| Pair::new(s)).collect::<Vec<_>>())
@@ -23,10 +22,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .map(move |s| -> i32 {
             let a = &s[0];
             let b = &s[1];
+            if b.0 >= a.0 && b.0 <= a.1 {
+                return 1;
+            }
+            if b.1 >= a.0 && b.1 <= a.1 {
+                return 1;
+            }
             if a.0 >= b.0 && a.1 <= b.1 {
                 return 1;
             }
-            if a.0 <= b.0 && a.1 >= b.1 {
+            if a.0 <= b.0 && b.1 <= a.1 {
                 return 1;
             }
             return 0;
